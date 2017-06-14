@@ -15,10 +15,17 @@ public class Generator {
     private ArrayList<Integer> array;
     private int count;
 
-    ArrayList<Integer> evn;
-    ArrayList<Integer> odd;
+    private ArrayList<Integer> evn;
+    private ArrayList<Integer> odd;
+
+    private ArrayList<Permutation> meanders;
+
+    public Generator() {
+
+    }
 
     public Generator(int n) {
+        meanders = new ArrayList<>();
         array = new ArrayList<>();
         evn = new ArrayList<>();
         odd = new ArrayList<>();
@@ -35,7 +42,15 @@ public class Generator {
         count = 0;
     }
 
-    public void generate() {
+    /**
+     * Алгоритм генерации меандров 2-го поколения
+     * */
+    public void generate2G() {
+        count = 0;
+        meanders = new ArrayList<>();
+
+        long t1 = System.currentTimeMillis();
+
         if (array.size() == 1){
             System.out.println("Количество: 1");
             return;
@@ -60,7 +75,7 @@ public class Generator {
 
                 if (permutation.isMeander()) {
                     count++;
-                    permutation.out();
+                    meanders.add(new Permutation(new ArrayList<>(array)));
                 }
             } while (next(evn));
 
@@ -69,9 +84,51 @@ public class Generator {
             }
         } while (next(odd));
         System.out.println("Количество: " + count);
+
+        long t2 = System.currentTimeMillis();
+        System.out.println("Время в миллисекундах: " + (t2 - t1));
+
     }
 
 
+    /**
+     * Алгоритм генерации мендров 1-го поколения
+     *
+     * @deprecated уже есть алгоритм 2-го поколения
+     * @see Generator#generate2G()
+     * */
+    public void generate1G(){
+        count = 1;
+        meanders = new ArrayList<>();
+
+        long t1 = System.currentTimeMillis();
+
+        Permutation permutation;
+        meanders.add(new Permutation(new ArrayList<>(array)));
+
+
+
+        while (next(array)){
+            permutation = new Permutation(array);
+            permutation.checkForMeander();
+
+            if (permutation.isMeander()){
+                count++;
+                meanders.add(new Permutation(new ArrayList<>(array)));
+            }
+
+        }
+
+        System.out.println("Количество: " + count);
+
+        long t2 = System.currentTimeMillis();
+        System.out.println("Время в миллисекундах: " + (t2 - t1));
+    }
+
+
+    /**
+     * Генерация перестновок без повторений в лекцикографичесок порядке
+     * */
     private boolean next(ArrayList<Integer> a) {
         int n = a.size();
 
@@ -101,5 +158,16 @@ public class Generator {
 
         return true;
     }
+
+    public void out(){
+        for (Permutation meander : meanders) {
+            meander.out();
+        }
+    }
+
+    public ArrayList<Permutation> getMeanders() {
+        return meanders;
+    }
+
 
 }

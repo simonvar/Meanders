@@ -17,13 +17,25 @@ public class Permutation {
      * */
     enum direction {Up, Down};
 
+    /**
+     * Числа перестановки
+     * */
     private ArrayList<Integer> numbers;
+
+    /**
+     * Является ли пеестановка меандром
+     * */
     private boolean isMeander;
 
     public Permutation(ArrayList<Integer> numbers) {
         this.numbers = numbers;
     }
 
+    /**
+     * Проверяет правильную расстановку четных и нечетных элементов
+     * и пересечения.
+     *
+     * */
     public void checkForMeander(){
         direction d = direction.Down;
         int start = 1;
@@ -74,6 +86,9 @@ public class Permutation {
         this.isMeander = true;
     }
 
+    /**
+     * Проверяет только пересечения
+     * */
     public void checkForMeanderInGen(){
         direction d = direction.Down;
         int start = 1;
