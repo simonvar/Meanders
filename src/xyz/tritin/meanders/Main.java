@@ -18,7 +18,6 @@ public class Main {
             System.out.println("***********");
             System.out.println("1. Проверить перестановку");
             System.out.println("2. Сгенерировать меандры");
-            System.out.println("3. Информация");
 
             try {
                 System.out.println();
@@ -40,8 +39,6 @@ public class Main {
                     break;
                 case 2:
                     gen();
-                    break;
-                case 3:
                     break;
             }
         }
