@@ -3,10 +3,18 @@ package xyz.tritin.meanders;
 import java.util.ArrayList;
 
 /**
- * Created by simon on 13.06.17.
+ * @author Simon
+ * @version 1.0
+ * @since 14.06.2017
+ *
+ * Класс перестановки.
+ *
  */
 public class Permutation {
 
+    /**
+     * Направление "реки"
+     * */
     enum direction {Up, Down};
 
     private ArrayList<Integer> numbers;
@@ -23,6 +31,7 @@ public class Permutation {
 
         ArrayList<Diapason> RangesDown = new ArrayList<>();
         ArrayList<Diapason> RangesUp = new ArrayList<>();
+        ArrayList<Diapason> ranges;
 
         for (int i = 0; i < numbers.size(); i++){
             int num = numbers.get(i);
@@ -37,26 +46,21 @@ public class Permutation {
             }
 
             if (d.equals(direction.Down)){
-                for (Diapason range : RangesDown){
-                    if (range.inRange(num) && !range.inRange(numbers.get(i - 1))){
-                        this.isMeander = false;
-                        return;
-                    }
-                }
-
-                RangesDown.add(new Diapason(start, num));
+                ranges = RangesDown;
                 d = direction.Up;
             } else {
-                for (Diapason range : RangesUp){
-                    if (range.inRange(num) && !range.inRange(numbers.get(i - 1))){
-                        this.isMeander = false;
-                        return;
-                    }
-                }
-
-                RangesUp.add(new Diapason(start, num));
+                ranges = RangesUp;
                 d = direction.Down;
             }
+
+            for (Diapason range : ranges){
+                if (range.inRange(num) && !range.inRange(numbers.get(i - 1))){
+                    this.isMeander = false;
+                    return;
+                }
+            }
+
+            ranges.add(new Diapason(start, num));
 
             start = num;
 
@@ -76,30 +80,28 @@ public class Permutation {
 
         ArrayList<Diapason> RangesDown = new ArrayList<>();
         ArrayList<Diapason> RangesUp = new ArrayList<>();
+        ArrayList<Diapason> ranges;
+
 
         for (int i = 0; i < numbers.size(); i++){
             int num = numbers.get(i);
-            if (d.equals(direction.Down)){
-                for (Diapason range : RangesDown){
-                    if (range.inRange(num) && !range.inRange(numbers.get(i - 1))){
-                        this.isMeander = false;
-                        return;
-                    }
-                }
 
-                RangesDown.add(new Diapason(start, num));
+            if (d.equals(direction.Down)){
+                ranges = RangesDown;
                 d = direction.Up;
             } else {
-                for (Diapason range : RangesUp){
-                    if (range.inRange(num) && !range.inRange(numbers.get(i - 1))){
-                        this.isMeander = false;
-                        return;
-                    }
-                }
-
-                RangesUp.add(new Diapason(start, num));
+                ranges = RangesUp;
                 d = direction.Down;
             }
+
+            for (Diapason range : ranges){
+                if (range.inRange(num) && !range.inRange(numbers.get(i - 1))){
+                    this.isMeander = false;
+                    return;
+                }
+            }
+
+            ranges.add(new Diapason(start, num));
 
             start = num;
         }
@@ -118,16 +120,9 @@ public class Permutation {
         return numbers;
     }
 
-    public void setNumbers(ArrayList<Integer> numbers) {
-        this.numbers = numbers;
-    }
-
     public boolean isMeander() {
         return isMeander;
     }
 
-    public void setMeander(boolean meander) {
-        isMeander = meander;
-    }
 
 }

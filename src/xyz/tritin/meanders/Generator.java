@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Created by simon on 13.06.17.
+ * @author Simon
+ * @version 1.0
+ * @since 14.06.2017
+ *
+ * Класс генерирования меандров
  */
-public class Generator implements Runnable {
+public class Generator {
 
     private ArrayList<Integer> array;
     private int count;
@@ -98,21 +102,4 @@ public class Generator implements Runnable {
         return true;
     }
 
-    /*
-    *
-    * 1 2 3 4
-    * 1 2 4 3 -
-    * 1 3 2 4 -
-    * 1 3 4 2
-    * 1 4 2 3 -
-    * 1 4 3 2
-    *
-    *
-    * */
-
-
-    @Override
-    public void run() {
-
-    }
 }
