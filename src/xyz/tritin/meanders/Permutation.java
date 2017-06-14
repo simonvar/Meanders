@@ -70,6 +70,43 @@ public class Permutation {
         this.isMeander = true;
     }
 
+    public void checkForMeanderInGen(){
+        direction d = direction.Down;
+        int start = 1;
+
+        ArrayList<Diapason> RangesDown = new ArrayList<>();
+        ArrayList<Diapason> RangesUp = new ArrayList<>();
+
+        for (int i = 0; i < numbers.size(); i++){
+            int num = numbers.get(i);
+            if (d.equals(direction.Down)){
+                for (Diapason range : RangesDown){
+                    if (range.inRange(num) && !range.inRange(numbers.get(i - 1))){
+                        this.isMeander = false;
+                        return;
+                    }
+                }
+
+                RangesDown.add(new Diapason(start, num));
+                d = direction.Up;
+            } else {
+                for (Diapason range : RangesUp){
+                    if (range.inRange(num) && !range.inRange(numbers.get(i - 1))){
+                        this.isMeander = false;
+                        return;
+                    }
+                }
+
+                RangesUp.add(new Diapason(start, num));
+                d = direction.Down;
+            }
+
+            start = num;
+        }
+
+        this.isMeander = true;
+    }
+
     public void out(){
         for (Integer number : numbers){
             System.out.print(number + " ");

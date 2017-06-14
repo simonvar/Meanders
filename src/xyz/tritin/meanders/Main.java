@@ -11,7 +11,6 @@ public class Main {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int menu = 0;
 
-
         while (true){
             clearScreen();
 
@@ -22,6 +21,8 @@ public class Main {
             System.out.println("3. Информация");
 
             try {
+                System.out.println();
+                System.out.print("Введите номер пункта: ");
                 menu = Integer.parseInt(reader.readLine());
             } catch (IOException e) {
                 e.printStackTrace();
@@ -45,10 +46,9 @@ public class Main {
             }
         }
 
-
     }
 
-    public static void gen(){
+    public static void gen() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Integer bridges = 0;
         clearScreen();
@@ -70,10 +70,15 @@ public class Main {
 
         Generator gen = new Generator(bridges);
         gen.generate();
-
+        System.out.println("...");
+        try {
+            reader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void check(){
+    public static void check() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         ArrayList<Integer> numbers = new ArrayList<>();
 
@@ -105,14 +110,19 @@ public class Main {
             System.out.println("Это меандр.");
         } else {
             System.out.println("Это не меандр.");
+        }
 
+        System.out.println("...");
+        try {
+            reader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     public static void clearScreen() {
-        System.out.println();
-        System.out.println();
-        System.out.println();
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
 }
