@@ -8,7 +8,14 @@ package xyz.tritin.meanders;
  * Диапазон. Хранит левое и правое знаачение отрезка.
  */
 public class Diapason {
+    /**
+     * Левая граница отрезка
+     * */
     private int left;
+
+    /**
+     * Правая граница отрезка
+     * */
     private int right;
 
     /**
@@ -37,7 +44,11 @@ public class Diapason {
         return (a <= right) && (a >= left);
     }
 
+    /**
+     * Вывод отрезка на экран
+     * [left,right]
+     * */
     public void out(){
-        System.out.println(left + " - " + right);
+        System.out.println("[" + left + "," + right+"]");
     }
 }

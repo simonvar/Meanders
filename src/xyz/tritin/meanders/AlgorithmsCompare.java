@@ -1,7 +1,10 @@
 package xyz.tritin.meanders;
 
 /**
- * Created by simon on 14.06.17.
+ * @author Simon
+ * @version 0.1
+ *
+ * Заготовка для сравнения алгоритмов
  */
 public class AlgorithmsCompare {
 

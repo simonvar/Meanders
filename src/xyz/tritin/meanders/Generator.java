@@ -12,18 +12,39 @@ import java.util.Collections;
  */
 public class Generator {
 
+    /**
+     * Массив для генерации перестановок
+     * */
     private ArrayList<Integer> array;
+
+    /**
+     * Кол-во сгенерированных меандров
+     * */
     private int count;
 
+    /**
+     * Массив четных позиций
+     * */
     private ArrayList<Integer> evn;
+
+    /**
+     * Массив нечетных позиций
+     * */
     private ArrayList<Integer> odd;
 
+    /**
+     * Сгенерированные меандры
+     * */
     private ArrayList<Permutation> meanders;
 
     public Generator() {
 
     }
 
+
+    /**
+     * @param n количество мостов
+     * */
     public Generator(int n) {
         meanders = new ArrayList<>();
         array = new ArrayList<>();
@@ -44,6 +65,7 @@ public class Generator {
 
     /**
      * Алгоритм генерации меандров 2-го поколения
+     * Используются два массива.
      * */
     public void generate2G() {
         count = 0;
@@ -52,7 +74,11 @@ public class Generator {
         long t1 = System.currentTimeMillis();
 
         if (array.size() == 1){
+            ArrayList<Integer> n = new ArrayList<>();
+            n.add(1);
+            meanders.add(new Permutation(n));
             System.out.println("Количество: 1");
+            System.out.println("Время в миллисекундах: 1");
             return;
         }
 
@@ -127,7 +153,7 @@ public class Generator {
 
 
     /**
-     * Генерация перестновок без повторений в лекцикографичесок порядке
+     * Генерация перестновок без повторений в лекcикографическом порядке
      * */
     private boolean next(ArrayList<Integer> a) {
         int n = a.size();

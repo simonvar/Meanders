@@ -84,21 +84,23 @@ public class Main {
             case 1:
             case 2:
                 try {
-                    System.out.println("Введите количество мостов (Пример: 1)");
-                    String line = reader.readLine();
-                    line = line.replaceAll("\\s+", "");
+                    do {
+                        System.out.println("Введите количество мостов (Натуральное число)");
+                        String line = reader.readLine();
+                        line = line.replaceAll("\\s+", "");
 
-                    try {
-                        bridges = Integer.parseInt(line);
-                    } catch (NumberFormatException e) {
-                        System.out.println("Вы ввели неверное значение!");
-                        return;
-                    }
+                        try {
+                            bridges = Integer.parseInt(line);
+                        } catch (NumberFormatException e) {
+                            System.out.println("Вы ввели неверное значение!");
+                            return;
+                        }
+                    } while (bridges <= 0);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-                System.out.println();
+                System.out.println("\nПодождите...\n");
                 gen = new Generator(bridges);
                 if (menu == 1) {
                     gen.generate1G();
@@ -131,6 +133,7 @@ public class Main {
                 return;
             case 1:
                 gen.out();
+                break;
             case 2:
                 try {
                     PrintWriter writer = new PrintWriter(bridges + "-meanders.txt", "UTF-8");

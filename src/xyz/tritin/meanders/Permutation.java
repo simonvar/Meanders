@@ -32,7 +32,7 @@ public class Permutation {
     }
 
     /**
-     * Проверяет правильную расстановку четных и нечетных элементов
+     * Проверяет правильную расстановку четных и нечетных элементов,
      * и пересечения.
      *
      * */
@@ -124,6 +124,9 @@ public class Permutation {
         this.isMeander = true;
     }
 
+    /**
+     * Вывод перестановки
+     * */
     public void out(){
         for (Integer number : numbers){
             System.out.print(number + " ");
