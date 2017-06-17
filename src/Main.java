@@ -1,15 +1,13 @@
-package xyz.tritin.meanders;
+import xyz.tritin.meanders.GenerationSystem;
+import xyz.tritin.meanders.Generator1G;
+import xyz.tritin.meanders.Generator2G;
+import xyz.tritin.meanders.Permutation;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
 
@@ -76,7 +74,7 @@ public class Main {
         }
 
         Integer bridges = 0;
-        Generator gen = new Generator();
+        GenerationSystem gen = new GenerationSystem();
 
         switch (menu) {
             case 0:
@@ -101,14 +99,18 @@ public class Main {
                 }
 
                 System.out.println("\nПодождите...\n");
-                gen = new Generator(bridges);
+                gen = new GenerationSystem();
                 if (menu == 1) {
-                    gen.generate1G();
+                    gen.setMeandersGenerator(new Generator1G());
                 } else {
-                    gen.generate2G();
+                    gen.setMeandersGenerator(new Generator2G());
                 }
+                gen.performGenerate(bridges);
                 break;
         }
+
+        gen.printCount();
+        gen.printTime();
 
         System.out.println();
         System.out.println("0. Продолжить");
